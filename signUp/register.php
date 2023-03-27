@@ -48,6 +48,7 @@
 
         <?php
             include '../db_connection.php';
+            session_start();
             function addUser($con) {
                 $name = $_POST['name'];
                 $username = $_POST['username'];
@@ -60,6 +61,7 @@
                 mysqli_stmt_execute($result);
                 
                 if($result) {
+                    unset($_SESSION['error']);
                     header("location:../index.php");
                 }
             }

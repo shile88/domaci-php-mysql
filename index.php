@@ -4,7 +4,7 @@ include './db_connection.php';
 include './checkBorrowedStatus.php';
 
 if (!key_exists('id', $_SESSION)) {
-    return header("location:/homework/login.php");
+    return header("location:./login.php");
 }
 
 ?>

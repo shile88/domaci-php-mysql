@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (key_exists('id', $_SESSION)) {
+    return header("location:./index.php");
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,6 +44,13 @@
             <img class="mb-4" src="./css/bootstrap-logo.svg" alt="" width="72" height="57">
             <h1 class="h3 mb-3 fw-normal">Prijavite se!</h1>
 
+            <?php if (key_exists('error', $_SESSION)) {
+                echo "<div class=\"alert alert-danger\" role=\"alert\">
+               Pogresno korisnicko ime ili sifra
+           </div>";
+            };
+            ?>
+
             <div class="form-floating">
                 <input type="text" class="form-control" id="username" name="username" id="floatingInput" required placeholder="Enter your username...">
                 <label for="floatingInput">Korisnicko ime</label>
@@ -45,7 +61,7 @@
             </div>
 
             <button class="w-100 btn btn-lg btn-primary" type="submit">Prijavi se</button>
-            
+
         </form>
 
         <form action="./signUp/register.php" method="POST">
@@ -54,13 +70,7 @@
     </main>
 
 
-    <?php
-        session_start();
 
-        if(key_exists('id', $_SESSION)) {
-            return header("location:/homework/index.php");
-        }
-    ?>
 </body>
 
 </html>

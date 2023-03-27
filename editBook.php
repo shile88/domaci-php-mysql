@@ -5,7 +5,7 @@ include './db_connection.php';
 session_start();
 
 if (!key_exists('id', $_SESSION) || !isset($_POST['id'])) {
-    return header("location:/homework/login.php");
+    return header("location:./login.php");
 }
 function editBook($con, $title, $author, $description, $id)
 {
@@ -15,7 +15,7 @@ function editBook($con, $title, $author, $description, $id)
     mysqli_stmt_execute($result);
 
     if ($result) {
-        header("location:/homework/index.php");
+        header("location:./index.php");
     }
 }
 

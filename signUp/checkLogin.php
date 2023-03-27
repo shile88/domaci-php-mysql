@@ -8,23 +8,26 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         
         if ($success) {
             $username = $_POST['username'];
-            $search = "SELECT * FROM users where username = '$username'";
-            $result = mysqli_query($con, $search); 
+            $search = "SELECT * FROM users where username = ?";
+            $stmt = mysqli_prepare($con, $search);
+            mysqli_stmt_bind_param($stmt, 's', $username);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
             $getRow = mysqli_fetch_assoc($result);
             $password = $getRow['password'];
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
             $isPasswordCorrect = password_verify($password, $hashed_password);
             
-            if ($getRow) {
-                if ($isPasswordCorrect) {
-                    $_SESSION['id'] = $getRow['id'];
-                }
+            if ($getRow && $isPasswordCorrect) {
+                    $_SESSION['id'] = $getRow['id'];               
+            } else {
+                $_SESSION['error'] = "error";
             }
         }
     }
         if (isset($_SESSION['id'])) {
-            return header("location:/homework/index.php");
+            return header("location:../index.php");
         }
 }
 
-header("location:/homework/login.php");
+header("location:../index.php");

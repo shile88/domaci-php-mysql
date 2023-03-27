@@ -3,7 +3,7 @@ session_start();
 include './db_connection.php';
 
 if (!key_exists('id', $_SESSION)) {
-    return header("location:/homework/login.php");
+    return header("location:./login.php");
 }
 
 function checkBorrowedBook($con) {
@@ -38,4 +38,4 @@ function checkBorrowedBook($con) {
 }
 
 checkBorrowedBook($con);
-header("location:/homework/index.php");
+header("location:./index.php");

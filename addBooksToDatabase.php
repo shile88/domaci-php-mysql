@@ -28,7 +28,7 @@
     session_start();
 
     if (!key_exists('id', $_SESSION)) {
-        return header("location:/homework/login.php");
+        return header("location:./login.php");
     }
     function addBooksToDatabase($con)
     {
@@ -42,7 +42,7 @@
         mysqli_stmt_execute($result);
 
         if ($result) {
-            header("location:/homework/index.php");
+            header("location:./index.php");
         }
     }
 
